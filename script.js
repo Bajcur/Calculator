@@ -34,3 +34,20 @@ function operate(operator, number1, number2) {
     }
 }
 
+function printer(input) {
+    if(display === 0){
+        document.getElementById("display").textContent = input;
+    } else{
+        document.getElementById("display").textContent += input;
+    }
+    return display += input;
+}
+
+let display = 0;
+const printingButtons = document.getElementsByClassName("printingButtons");
+console.log(printingButtons);
+console.log(display);
+Array.from(printingButtons).forEach((button) => {
+    button.addEventListener('click', () => printer(button.id))
+});
+
