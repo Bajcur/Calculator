@@ -2,25 +2,33 @@
 
 //basic math functions
 function add(a, b) {
-    return a + b
+    let result = +a + +b;
+    document.getElementById("display").textContent = result;
+    return number1 = result;
 }
 
 function subtract(a, b) {
-    return a - b
+    let result = +a - +b;
+    document.getElementById("display").textContent = result;
+    return number1 = result;
 }
 
 function multiply(a, b) {
-    return a * b
+    let result = +a * +b;
+    document.getElementById("display").textContent = result;
+    return number1 = result;
 }
 
 function divide(a, b) {
-    return a / b
+    let result = +a / +b;
+    document.getElementById("display").textContent = result;
+    return number1 = result;
 }
 
 //basic variables
-let number1;
-let operator;
-let number2;
+let number1 = "";
+let operator = "";
+let number2 = "";
 
 function operate(operator, number1, number2) {
     if (operator === "+") {
@@ -45,9 +53,31 @@ function printer(input) {
 
 let display = 0;
 const printingButtons = document.getElementsByClassName("printingButtons");
-console.log(printingButtons);
-console.log(display);
+const operators = document.getElementsByClassName("operator");
+const equals = document.getElementById("=");
+//console.log(printingButtons);
+//console.log(display);
 Array.from(printingButtons).forEach((button) => {
-    button.addEventListener('click', () => printer(button.id))
+    button.addEventListener('click', () => {
+        printer(button.id);
+        if (number1 === ""){
+            number1 += button.id
+            return console.log(number1);
+        } else {
+            number2 += button.id;
+            return console.log(number2);
+        }
+    })
 });
 
+Array.from(operators).forEach((button) => {
+    button.addEventListener('click', () => {
+        printer(button.id);
+        return operator = button.id;
+    })
+});
+
+equals.addEventListener('click', () => {
+    operate(operator, number1, number2);
+    return number2 = "";
+});
