@@ -2,27 +2,47 @@
 
 //basic math functions
 function add(a, b) {
-    let result = +a + +b;
-    document.getElementById("display").textContent = result;
-    return number1 = result;
+    let result = Math.round(( +a + +b ) * 1000) / 1000;
+    if (result > 999999){
+        document.getElementById("display").textContent = result.toExponential(3);
+    }else {
+        document.getElementById("display").textContent = result;
+    }
+    number1 = result;
+    return toString(number1);
 }
 
 function subtract(a, b) {
-    let result = +a - +b;
-    document.getElementById("display").textContent = result;
-    return number1 = result;
+    let result = Math.round(( +a - +b ) * 1000) / 1000;
+    if (result > 999999){
+        document.getElementById("display").textContent = result.toExponential(3);
+    }else {
+        document.getElementById("display").textContent = result;
+    }
+    number1 = result;
+    return toString(number1);
 }
 
 function multiply(a, b) {
-    let result = +a * +b;
-    document.getElementById("display").textContent = result;
-    return number1 = result;
+    let result = Math.round(( +a * +b ) * 1000) / 1000;
+    if (result > 999999){
+        document.getElementById("display").textContent = result.toExponential(3);
+    }else {
+        document.getElementById("display").textContent = result;
+    }
+    number1 = result;
+    return toString(number1);
 }
 
 function divide(a, b) {
-    let result = +a / +b;
-    document.getElementById("display").textContent = result;
-    return number1 = result;
+    let result = Math.round(( +a / +b ) * 1000) / 1000;
+    if (result > 999999){
+        document.getElementById("display").textContent = result.toExponential(3);
+    }else {
+        document.getElementById("display").textContent = result;
+    }
+    number1 = result;
+    return toString(number1);
 }
 
 //basic variables
@@ -43,15 +63,17 @@ function operate(operator, number1, number2) {
 }
 
 function printer(input) {
-    if(display === 0){
-        document.getElementById("display").textContent = input;
-    } else{
-        document.getElementById("display").textContent += input;
+    display = document.getElementById("display").textContent
+    if (display.length < 11){
+        if(display === "0" ){
+            return document.getElementById("display").textContent = input;
+        } else{
+            return document.getElementById("display").textContent += input;
+        }
     }
-    return display += input;
 }
 
-let display = 0;
+let display = 0
 const printingButtons = document.getElementsByClassName("printingButtons");
 const operators = document.getElementsByClassName("operator");
 const equals = document.getElementById("=");
@@ -59,11 +81,11 @@ const equals = document.getElementById("=");
 //console.log(display);
 Array.from(printingButtons).forEach((button) => {
     button.addEventListener('click', () => {
-        printer(button.id);
-        if (number1 === ""){
+        printer(button.id);    
+        if (operator === "" && number1.length < 11){
             number1 += button.id
             return console.log(number1);
-        } else {
+        } else if (number2.length < 11) {
             number2 += button.id;
             return console.log(number2);
         }
