@@ -73,10 +73,11 @@ function printer(input) {
     }
 }
 
-let display = 0
+let display = 0;
 const printingButtons = document.getElementsByClassName("printingButtons");
 const operators = document.getElementsByClassName("operator");
 const equals = document.getElementById("=");
+const clear = document.getElementById("clear")
 //console.log(printingButtons);
 //console.log(display);
 Array.from(printingButtons).forEach((button) => {
@@ -103,3 +104,28 @@ equals.addEventListener('click', () => {
     operate(operator, number1, number2);
     return number2 = "";
 });
+
+//cleanup functions
+clear.addEventListener('click', () => {
+    clearDisplay();
+    clearNumber1();
+    clearNumber2();
+    clearOperator();
+})
+
+function clearDisplay(){
+    return document.getElementById("display").textContent = 0;
+}
+
+function clearNumber1(){
+    return number1 = "";       
+}
+
+function clearNumber2(){
+    return number2 = "";
+}
+
+function clearOperator(){
+    return operator = "";
+}
+
