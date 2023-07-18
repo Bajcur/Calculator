@@ -77,7 +77,8 @@ let display = 0;
 const printingButtons = document.getElementsByClassName("printingButtons");
 const operators = document.getElementsByClassName("operator");
 const equals = document.getElementById("=");
-const clear = document.getElementById("clear")
+const clear = document.getElementById("clear");
+const del = document.getElementById("delete")
 //console.log(printingButtons);
 //console.log(display);
 Array.from(printingButtons).forEach((button) => {
@@ -95,6 +96,7 @@ Array.from(printingButtons).forEach((button) => {
 
 Array.from(operators).forEach((button) => {
     button.addEventListener('click', () => {
+        secondOperator(operator, number1, number2);
         printer(button.id);
         return operator = button.id;
     })
@@ -129,3 +131,45 @@ function clearOperator(){
     return operator = "";
 }
 
+//second operator
+function secondOperator(operator, number1, number2){
+    if(document.getElementById("display").textContent.match(/(?!^-)[+*\/-](\s?-)?/g, '+$1')){
+        operate(operator, number1, number2);
+        clearNumber2();
+    }
+}
+
+//delete
+function deletingDisplay(){
+    if(document.getElementById("display").textContent.length > 1){
+        return document.getElementById("display").textContent = document.getElementById("display").textContent.slice(0, -1);
+    } else {
+        return document.getElementById("display").textContent = 0;
+    }      
+}
+
+//deleting last digit of number 2 also deletes operator and number 1
+function deletingNumber2(){
+    if (number2){
+        return number2 = number2.slice(0, -1);
+    }
+}
+
+function deletingOperator(){
+    if (operator && !number2){
+        return operator = operator.slice(0, -1);
+    }
+}
+
+function deletingNumber1(){
+    if (number1 && (!operator && !number2)){
+        return number1 = number1.slice(0, -1);
+    }
+}
+
+del.addEventListener('click', () => {
+    deletingNumber2();
+    deletingOperator();
+    deletingNumber1();
+    deletingDisplay();
+})
