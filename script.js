@@ -37,9 +37,12 @@ function multiply(a, b) {
 
 function divide(a, b) {
     let result = Math.round(( +a / +b ) * 1000) / 1000;
-    if (result > 999999){
+    if (result > 999999 && b !== "0"){
         document.getElementById("display").textContent = result.toExponential(3);
-    }else {
+    }else if(b === "0"){
+        document.getElementById("display").textContent = "ERROR";
+        alert("You can't divide by 0! Clear display and divide by other number!");
+    } else {
         document.getElementById("display").textContent = result;
     }
     number1 = result.toString();
@@ -82,8 +85,10 @@ const clear = document.getElementById("clear");
 const del = document.getElementById("delete")
 //console.log(printingButtons);
 //console.log(display);
+
 Array.from(printingButtons).forEach((button) => {
     button.addEventListener('click', () => {
+        checkIfDecimal();
         printer(button.id);    
         if (operator == "" && number1.length < 11){
             number1 += button.id
@@ -167,3 +172,13 @@ del.addEventListener('click', () => {
     deleting();
     deletingDisplay();
 })
+
+function checkIfDecimal(){
+    const dot = document.getElementById(".");
+    dot.disabled = false;
+    if(number1.match(/\./g) || number2.match(/\./g)){
+        dot.disabled = true;
+    } else {
+        dot.disabled = false;
+    }       
+}
