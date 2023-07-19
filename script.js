@@ -2,14 +2,15 @@
 
 //basic math functions
 function add(a, b) {
+    console.log(a, b);
     let result = Math.round(( +a + +b ) * 1000) / 1000;
     if (result > 999999){
         document.getElementById("display").textContent = result.toExponential(3);
     }else {
         document.getElementById("display").textContent = result;
     }
-    number1 = result;
-    return toString(number1);
+    number1 = result.toString();
+    return number1;
 }
 
 function subtract(a, b) {
@@ -19,8 +20,8 @@ function subtract(a, b) {
     }else {
         document.getElementById("display").textContent = result;
     }
-    number1 = result;
-    return toString(number1);
+    number1 = result.toString();
+    return number1;
 }
 
 function multiply(a, b) {
@@ -30,8 +31,8 @@ function multiply(a, b) {
     }else {
         document.getElementById("display").textContent = result;
     }
-    number1 = result;
-    return toString(number1);
+    number1 = result.toString();
+    return number1;
 }
 
 function divide(a, b) {
@@ -41,8 +42,8 @@ function divide(a, b) {
     }else {
         document.getElementById("display").textContent = result;
     }
-    number1 = result;
-    return toString(number1);
+    number1 = result.toString();
+    return number1;
 }
 
 //basic variables
@@ -84,7 +85,7 @@ const del = document.getElementById("delete")
 Array.from(printingButtons).forEach((button) => {
     button.addEventListener('click', () => {
         printer(button.id);    
-        if (operator === "" && number1.length < 11){
+        if (operator == "" && number1.length < 11){
             number1 += button.id
             return console.log(number1);
         } else if (number2.length < 11) {
@@ -104,7 +105,10 @@ Array.from(operators).forEach((button) => {
 
 equals.addEventListener('click', () => {
     operate(operator, number1, number2);
-    return number2 = "";
+    console.log(operator);
+    clearOperator();
+    clearNumber2();
+    console.log(typeof(number1));
 });
 
 //cleanup functions
@@ -148,28 +152,18 @@ function deletingDisplay(){
     }      
 }
 
-//deleting last digit of number 2 also deletes operator and number 1
-function deletingNumber2(){
+//deleting
+function deleting(){
     if (number2){
         return number2 = number2.slice(0, -1);
-    }
-}
-
-function deletingOperator(){
-    if (operator && !number2){
+    }else if (operator && !number2){
         return operator = operator.slice(0, -1);
-    }
-}
-
-function deletingNumber1(){
-    if (number1 && (!operator && !number2)){
+    }else if (number1 && (!operator && !number2)){
         return number1 = number1.slice(0, -1);
     }
 }
 
 del.addEventListener('click', () => {
-    deletingNumber2();
-    deletingOperator();
-    deletingNumber1();
+    deleting();
     deletingDisplay();
 })
