@@ -82,19 +82,23 @@ const printingButtons = document.getElementsByClassName("printingButtons");
 const operators = document.getElementsByClassName("operator");
 const equals = document.getElementById("=");
 const clear = document.getElementById("clear");
-const del = document.getElementById("delete")
+const del = document.getElementById("delete");
+const dot = document.getElementById(".");
+dot.disabled = false;
 //console.log(printingButtons);
 //console.log(display);
 
 Array.from(printingButtons).forEach((button) => {
     button.addEventListener('click', () => {
-        checkIfDecimal();
-        printer(button.id);    
+        checkIfDecimal1();
+        printer(button.id);   
         if (operator == "" && number1.length < 11){
-            number1 += button.id
+            number1 += button.id;
+            checkIfDecimal1();
             return console.log(number1);
         } else if (number2.length < 11) {
             number2 += button.id;
+            checkIfDecimal2();
             return console.log(number2);
         }
     })
@@ -110,10 +114,8 @@ Array.from(operators).forEach((button) => {
 
 equals.addEventListener('click', () => {
     operate(operator, number1, number2);
-    console.log(operator);
     clearOperator();
     clearNumber2();
-    console.log(typeof(number1));
 });
 
 //cleanup functions
@@ -173,12 +175,20 @@ del.addEventListener('click', () => {
     deletingDisplay();
 })
 
-function checkIfDecimal(){
-    const dot = document.getElementById(".");
-    dot.disabled = false;
-    if(number1.match(/\./g) || number2.match(/\./g)){
-        dot.disabled = true;
-    } else {
-        dot.disabled = false;
-    }       
+//only one dot per number
+function checkIfDecimal2(){
+    if(number2.match(/\./)){
+        return dot.disabled = true;     
+    } else{
+        return dot.disabled = false;
+    }
+    
+}
+
+function checkIfDecimal1(){
+    if(number1.match(/\./)){
+        return dot.disabled = true;
+    } else{
+        return dot.disabled = false;
+    }
 }
