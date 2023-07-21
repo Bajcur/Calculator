@@ -50,7 +50,7 @@ function divide(a, b) {
 }
 
 //basic variables
-let number1 = "";
+let number1 = "0";
 let operator = "";
 let number2 = "";
 
@@ -84,6 +84,7 @@ const equals = document.getElementById("=");
 const clear = document.getElementById("clear");
 const del = document.getElementById("delete");
 const dot = document.getElementById(".");
+const minus = document.getElementById("-");
 dot.disabled = false;
 //console.log(printingButtons);
 //console.log(display);
@@ -144,7 +145,7 @@ function clearOperator(){
 
 //second operator
 function secondOperator(operator, number1, number2){
-    if(document.getElementById("display").textContent.match(/(?!^-)[+*\/-](\s?-)?/g, '+$1')){
+    if(document.getElementById("display").textContent.match(/[+*\/-](\s?-)?/g, '+$1' && number2 == true)){
         operate(operator, number1, number2);
         clearNumber2();
     }
