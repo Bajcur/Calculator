@@ -82,7 +82,7 @@ const printingButtons = document.getElementsByClassName("printingButtons");
 const operators = document.getElementsByClassName("operator");
 const equals = document.getElementById("=");
 const clear = document.getElementById("clear");
-const del = document.getElementById("delete");
+const backspace = document.getElementById("backspace");
 const dot = document.getElementById(".");
 const minus = document.getElementById("-");
 dot.disabled = false;
@@ -171,7 +171,7 @@ function deleting(){
     }
 }
 
-del.addEventListener('click', () => {
+backspace.addEventListener('click', () => {
     deleting();
     deletingDisplay();
 })
@@ -193,3 +193,52 @@ function checkIfDecimal1(){
         return dot.disabled = false;
     }
 }
+
+//keyboard support
+
+document.addEventListener('keydown', (event) => {
+    checkIfDecimal1(); 
+    if (operator == "" && number1.length < 11 && event.key.match(/^[\.0-9]*$/)){
+        printer(event.key);
+        number1 += event.key;
+        checkIfDecimal1();
+        return console.log(number1);
+    } else if (number2.length < 11 && event.key.match(/^[\.0-9]*$/)){
+        printer(event.key);
+        number2 += event.key;
+        checkIfDecimal2();
+        return console.log(number2);
+    }    
+});
+
+document.addEventListener('keydown', (event) => {
+    if(event.key.match(/^[+*\/-]*$/)){
+        secondOperator(operator, number1, number2);
+        printer(event.key);
+        return operator = event.key; 
+    }   
+})
+
+document.addEventListener('keydown', (event) => {
+    if(event.key === "Enter"){
+        operate(operator, number1, number2);
+        clearOperator();
+        clearNumber2();
+    }    
+})
+
+document.addEventListener('keydown', (event) => {
+    if(event.key === "Delete"){
+        clearDisplay();
+        clearNumber1();
+        clearNumber2();
+        clearOperator();
+    }
+})
+
+document.addEventListener('keydown', (event) => {
+    if(event.key === "Backspace"){
+        deleting();
+        deletingDisplay();
+    }
+})

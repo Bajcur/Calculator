@@ -52,7 +52,7 @@ body {
     margin: 20px 0px 10px 0px;
 }
 
-#clear, #delete {
+#clear, #backspace {
     flex: 1;
     background-color: paleturquoise;
 }
