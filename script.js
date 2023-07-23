@@ -10,6 +10,7 @@ function add(a, b) {
         document.getElementById("display").textContent = result;
     }
     number1 = result.toString();
+    checkIfDecimal1();
     return number1;
 }
 
@@ -21,6 +22,7 @@ function subtract(a, b) {
         document.getElementById("display").textContent = result;
     }
     number1 = result.toString();
+    checkIfDecimal1();
     return number1;
 }
 
@@ -32,6 +34,7 @@ function multiply(a, b) {
         document.getElementById("display").textContent = result;
     }
     number1 = result.toString();
+    checkIfDecimal1();
     return number1;
 }
 
@@ -46,6 +49,7 @@ function divide(a, b) {
         document.getElementById("display").textContent = result;
     }
     number1 = result.toString();
+    checkIfDecimal1();
     return number1;
 }
 
